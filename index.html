@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sonríe Clínica Dental — Odontología premium con tecnología avanzada en San Salvador.">
+  <title>Sonríe Clínica Dental | Tu sonrisa, nuestra pasión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #030a14;
+      --bg-navy: #0a1a33;
+      --glass: rgba(12, 28, 55, 0.55);
+      --glass-border: rgba(120, 180, 255, 0.18);
+      --glass-glow: rgba(0, 180, 255, 0.12);
+      --blue: #3b82f6;
+      --blue-bright: #60a5fa;
+      --cyan: #00d4ff;
+      --cyan-glow: rgba(0, 212, 255, 0.45);
+      --white: #ffffff;
+      --muted: rgba(255, 255, 255, 0.62);
+      --wa: #25d366;
+      --wa-dark: #1ebe57;
+      --radius: 18px;
+      --radius-lg: 28px;
+      --pill: 999px;
+      --ease: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-h: 88px;
+      --max: 1180px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-deep);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
+
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(0, 180, 255, 0.05);
+    }
+
+    .text-cyan {
+      background: linear-gradient(135deg, #7dd3fc, var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Background */
+    .bg-fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    .bg-fx__grad {
+      position: absolute; inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1920&q=30') center/cover no-repeat,
+        linear-gradient(180deg, rgba(3,10,20,0.92) 0%, rgba(10,26,51,0.88) 45%, rgba(3,10,20,0.95) 100%);
+      background-blend-mode: overlay;
+    }
+    .bg-fx__grad::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 75% 15%, rgba(0, 180, 255, 0.18), transparent),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(59, 130, 246, 0.12), transparent);
+    }
+    .bg-fx__orb {
+      position: absolute; border-radius: 50%; filter: blur(90px);
+      animation: orbDrift 14s ease-in-out infinite;
+    }
+    .bg-fx__orb--1 { width: 480px; height: 480px; background: rgba(0, 150, 255, 0.22); top: -8%; right: 0; }
+    .bg-fx__orb--2 { width: 360px; height: 360px; background: rgba(0, 212, 255, 0.1); bottom: 10%; left: -5%; animation-delay: -7s; }
+    @keyframes orbDrift {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(25px, -20px); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.9rem 1.6rem; border-radius: var(--pill); font-weight: 600; font-size: 0.88rem;
+      border: none; cursor: pointer; transition: transform var(--ease), box-shadow var(--ease);
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--blue {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff; box-shadow: 0 4px 24px rgba(59, 130, 246, 0.45);
+    }
+    .btn--blue:hover { box-shadow: 0 8px 32px rgba(59, 130, 246, 0.55); }
+    .btn--wa {
+      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
+      color: #fff; box-shadow: 0 4px 24px rgba(37, 211, 102, 0.4);
+    }
+    .btn--wa:hover { box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5); }
+    .btn--wa svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn--outline-wa {
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.45);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.15);
+    }
+    .btn--outline-wa:hover { background: rgba(37, 211, 102, 0.18); border-color: var(--wa); }
+    .btn--outline-wa svg { width: 16px; height: 16px; }
+    .btn--block { width: 100%; padding: 0.75rem 1rem; font-size: 0.82rem; }
+    .btn--xl { padding: 1.1rem 2.5rem; font-size: 1rem; }
+
+    /* Navbar */
+    .nav-wrap {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1rem 0; transition: padding var(--ease), background var(--ease);
+    }
+    .nav-wrap.scrolled {
+      padding: 0.6rem 0;
+      background: rgba(3, 10, 20, 0.88);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.65rem 1.25rem; border-radius: var(--pill);
+    }
+    .logo { display: flex; align-items: center; gap: 0.6rem; }
+    .logo img { width: 38px; height: 38px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4)); }
+    .logo strong { font-size: 1.05rem; letter-spacing: 0.1em; display: block; }
+    .logo small { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a {
+      font-size: 0.85rem; color: var(--muted); transition: color var(--ease);
+      position: relative;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width var(--ease);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer;
+    }
+    .nav-toggle span { width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+    /* Hero */
+    .hero {
+      padding: calc(var(--nav-h) + 2rem) 0 0;
+      min-height: 92vh;
+      display: flex; align-items: center;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-block; padding: 0.35rem 1rem; border-radius: var(--pill);
+      border: 1px solid rgba(0, 212, 255, 0.35); font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan);
+      background: rgba(0, 212, 255, 0.08); margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem); font-weight: 800; line-height: 1.08;
+      letter-spacing: -0.03em; margin-bottom: 1rem;
+    }
+    .hero p { color: var(--muted); font-size: 1.02rem; max-width: 460px; margin-bottom: 2rem; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+
+    /* Hero sphere + tooth image */
+    .hero-visual { display: flex; justify-content: center; position: relative; }
+    .sphere-wrap {
+      position: relative; width: min(440px, 88vw); aspect-ratio: 1;
+      animation: floatY 6s ease-in-out infinite;
+    }
+    @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+    .sphere-wrap::before {
+      content: ''; position: absolute; inset: 5%; border-radius: 50%;
+      border: 1px dashed rgba(0, 212, 255, 0.25);
+      animation: spin 22s linear infinite;
+    }
+    .sphere-wrap::after {
+      content: ''; position: absolute; inset: 12%; border-radius: 50%;
+      background: radial-gradient(circle, var(--cyan-glow), transparent 65%);
+      filter: blur(28px); animation: pulseGlow 4s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    .sphere-glass {
+      position: absolute; inset: 8%; border-radius: 50%; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.2), rgba(0,100,200,0.08) 50%, rgba(0,20,40,0.5));
+      box-shadow: inset 0 0 80px rgba(255,255,255,0.08), 0 0 80px rgba(0, 180, 255, 0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sphere-glass img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      filter: brightness(1.05) saturate(1.1);
+    }
+    .bubble {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), rgba(0,180,255,0.08));
+      border: 1px solid rgba(255,255,255,0.15);
+      animation: bubbleFloat 5s ease-in-out infinite;
+    }
+    .bubble--1 { width: 48px; height: 48px; top: 8%; right: 12%; animation-delay: 0s; }
+    .bubble--2 { width: 32px; height: 32px; bottom: 18%; left: 8%; animation-delay: 1.2s; }
+    .bubble--3 { width: 24px; height: 24px; top: 42%; right: 2%; animation-delay: 2s; }
+    @keyframes bubbleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Features ribbon */
+    .features-ribbon {
+      margin-top: 2.5rem; margin-bottom: 1rem;
+      padding: 1.1rem 1.5rem; border-radius: var(--radius-lg);
+      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: 0.65rem;
+      font-size: 0.78rem; color: var(--muted); transition: color var(--ease);
+    }
+    .feature-item:hover { color: #fff; }
+    .feature-item img { width: 36px; height: 36px; object-fit: contain; opacity: 0.9; }
+
+    /* Sections */
+    .section { padding: 4.5rem 0; }
+    .section-head { text-align: center; margin-bottom: 2.75rem; }
+    .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 0.4rem; }
+    .section-head p { color: var(--muted); font-size: 0.92rem; }
+
+    /* Services */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem;
+    }
+    .service-item {
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      transition: transform var(--ease);
+    }
+    .service-item:hover { transform: translateY(-8px); }
+    .service-bubble {
+      width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+      position: relative; padding: 4px;
+      background: linear-gradient(145deg, rgba(0,212,255,0.3), rgba(59,130,246,0.1));
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 24px rgba(0, 180, 255, 0.12);
+      transition: box-shadow var(--ease);
+    }
+    .service-item:hover .service-bubble { box-shadow: 0 12px 40px rgba(0, 180, 255, 0.28); }
+    .service-bubble-inner {
+      width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+      background: rgba(8, 20, 40, 0.6); border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .service-bubble img {
+      width: 85%; height: 85%; object-fit: cover; border-radius: 50%;
+    }
+    .service-item span { font-size: 0.72rem; text-align: center; color: var(--muted); }
+    .service-item:hover span { color: #fff; }
+
+    /* Stats */
+    .stats-bar {
+      padding: 1.5rem 2rem; border-radius: var(--radius-lg);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .stat { text-align: center; flex: 1; min-width: 130px; }
+    .stat strong {
+      display: block; font-size: 1.85rem; font-weight: 800;
+      background: linear-gradient(180deg, #fff, var(--blue-bright));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-promo {
+      display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.1rem;
+      border-radius: var(--radius); flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(0,212,255,0.1));
+      border: 1px solid rgba(0, 212, 255, 0.35);
+    }
+    .stat-promo img { width: 44px; height: 44px; object-fit: contain; }
+    .stat-promo b { display: block; font-size: 0.75rem; }
+    .stat-promo em { font-style: normal; font-size: 1.05rem; font-weight: 800; color: var(--cyan); }
+
+    /* Treatments */
+    .treatments-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+    .t-card {
+      border-radius: var(--radius-lg); overflow: hidden; padding: 1.1rem;
+      display: flex; flex-direction: column; transition: transform var(--ease), box-shadow var(--ease);
+    }
+    .t-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0, 150, 255, 0.2); }
+    .t-card h3 { font-size: 0.95rem; margin-bottom: 0.75rem; text-align: center; }
+    .t-card__img {
+      flex: 1; min-height: 160px; border-radius: var(--radius); overflow: hidden; margin-bottom: 0.85rem;
+      background: rgba(0, 30, 60, 0.5);
+    }
+    .t-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .t-card:hover .t-card__img img { transform: scale(1.06); }
+    .t-card__price { font-size: 0.8rem; color: var(--cyan); font-weight: 600; text-align: center; margin-bottom: 0.65rem; }
+
+    /* Tech */
+    .tech-box {
+      border-radius: var(--radius-lg); padding: 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;
+    }
+    .tech-box h2 { font-size: 1.55rem; line-height: 1.25; margin-bottom: 1.5rem; }
+    .tech-check { display: flex; flex-direction: column; gap: 0.85rem; }
+    .tech-check li {
+      display: flex; align-items: center; gap: 0.85rem; padding: 0.75rem 1rem;
+      border-radius: var(--radius); background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border); transition: background var(--ease);
+    }
+    .tech-check li:hover { background: rgba(0, 180, 255, 0.08); }
+    .tech-check img { width: 32px; height: 32px; object-fit: contain; }
+    .tech-check strong { display: block; font-size: 0.88rem; }
+    .tech-check span { font-size: 0.78rem; color: var(--muted); }
+    .tech-visual {
+      border-radius: var(--radius); overflow: hidden; height: 320px;
+      box-shadow: 0 0 60px rgba(0, 180, 255, 0.15);
+    }
+    .tech-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* CTA */
+    .cta-big {
+      text-align: center; padding: 3rem 2rem; border-radius: var(--radius-lg);
+      margin-bottom: 1.25rem;
+    }
+    .cta-big h2 { font-size: clamp(1.4rem, 3vw, 1.85rem); margin-bottom: 0.5rem; }
+    .cta-big p { color: var(--muted); margin-bottom: 1.5rem; font-size: 0.92rem; }
+
+    .values-bar {
+      padding: 1.1rem 1.5rem; border-radius: var(--radius-lg);
+      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 0.85rem;
+    }
+    .value-chip {
+      display: flex; align-items: center; gap: 0.45rem; font-size: 0.75rem; color: var(--muted);
+    }
+    .value-chip img { width: 28px; height: 28px; object-fit: contain; }
+
+    /* Formulario de cita */
+    .form-section { padding: 3rem 0 4.5rem; }
+    .form-card {
+      max-width: 640px; margin-inline: auto; padding: 2rem 2rem 1.75rem;
+      border-radius: var(--radius-lg);
+    }
+    .form-card__head { text-align: center; margin-bottom: 1.75rem; }
+    .form-card__head h2 { font-size: 1.45rem; margin-bottom: 0.35rem; }
+    .form-card__head p { font-size: 0.88rem; color: var(--muted); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group--full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.85);
+      letter-spacing: 0.02em;
+    }
+    .form-group label span { color: var(--cyan); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem 1rem; border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(0, 20, 45, 0.5);
+      color: #fff; font-family: inherit; font-size: 0.88rem;
+      transition: border-color var(--ease), box-shadow var(--ease);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: rgba(0, 212, 255, 0.55);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.12);
+    }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #0a1a33; color: #fff; }
+    .form-group textarea { resize: vertical; min-height: 88px; }
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error { border-color: #f87171; }
+    .form-error {
+      font-size: 0.72rem; color: #fca5a5; min-height: 1rem;
+      display: none;
+    }
+    .form-group.has-error .form-error { display: block; }
+    .form-submit { margin-top: 1.25rem; }
+    .form-note {
+      text-align: center; font-size: 0.72rem; color: var(--muted);
+      margin-top: 0.85rem; line-height: 1.5;
+    }
+    .form-note svg { display: inline; vertical-align: -2px; margin-right: 2px; }
+
+    /* Footer */
+    .footer {
+      padding: 3.5rem 0 2rem; border-top: 1px solid var(--glass-border);
+      background: rgba(3, 10, 20, 0.7);
+    }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.35fr; gap: 2rem; }
+    .footer h4 { font-size: 0.82rem; margin-bottom: 0.9rem; }
+    .footer li { margin-bottom: 0.45rem; }
+    .footer a, .footer span { font-size: 0.82rem; color: var(--muted); transition: color var(--ease); }
+    .footer a:hover { color: #fff; }
+    .footer-copy { margin-top: 1rem; font-size: 0.75rem; color: var(--muted); }
+    .footer-contact li { display: flex; align-items: flex-start; gap: 0.5rem; }
+    .footer-contact svg { flex-shrink: 0; margin-top: 2px; color: var(--cyan); width: 15px; height: 15px; }
+    .footer-wa {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+      padding: 0.65rem 1rem; border-radius: var(--radius);
+      background: rgba(37, 211, 102, 0.1); border: 1px solid rgba(37, 211, 102, 0.35);
+      color: var(--wa); font-size: 0.82rem;
+    }
+    .footer-wa:hover { background: rgba(37, 211, 102, 0.2); }
+
+    /* FAB */
+    .wa-fab {
+      position: fixed; bottom: 22px; right: 22px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5); transition: transform var(--ease);
+    }
+    .wa-fab:hover { transform: scale(1.1); }
+    .wa-fab svg { width: 30px; height: 30px; fill: #fff; }
+    .wa-fab::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid var(--wa); animation: fabRing 2s ease-out infinite;
+    }
+    @keyframes fabRing { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.45); opacity: 0; } }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .treatments-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-box { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .nav-links, .nav-bar .btn--outline-wa { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: fixed; inset: 0;
+        background: rgba(3, 10, 20, 0.97); backdrop-filter: blur(20px);
+        align-items: center; justify-content: center; gap: 1.75rem; z-index: 998;
+      }
+      .nav-links.open a { font-size: 1.2rem; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero p { margin-inline: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-visual { order: -1; }
+      .sphere-wrap { width: min(300px, 80vw); }
+      .features-ribbon { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .treatments-grid { grid-template-columns: 1fr; }
+      .stats-bar { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="bg-fx__grad"></div>
+    <div class="bg-fx__orb bg-fx__orb--1"></div>
+    <div class="bg-fx__orb bg-fx__orb--2"></div>
+  </div>
+
+  <header class="nav-wrap" id="navWrap">
+    <div class="container">
+      <div class="nav-bar glass">
+        <a href="#inicio" class="logo">
+          <img src="https://img.icons8.com/fluency/96/tooth.png" alt="" width="38" height="38">
+          <span><strong>SONRÍE</strong><small>Clínica Dental</small></span>
+        </a>
+        <nav class="nav-links" id="navLinks">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#tratamientos">Tratamientos</a>
+          <a href="#tecnologia">Especialistas</a>
+          <a href="#formulario">Agendar</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <a href="#" class="btn btn--outline-wa wa-link" data-wa>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbenos por WhatsApp
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="reveal">
+            <span class="hero-badge">Cuidamos tu sonrisa</span>
+            <h1>Tu sonrisa, nuestra <span class="text-cyan">pasión</span></h1>
+            <p>Odontología de alta calidad con tecnología avanzada y un enfoque humano centrado en ti.</p>
+            <div class="hero-btns">
+              <a href="#formulario" class="btn btn--blue">
+                Agendar cita
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#" class="btn btn--wa wa-link" data-wa>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Escríbenos por WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual reveal">
+            <div class="sphere-wrap">
+              <span class="bubble bubble--1" aria-hidden="true"></span>
+              <span class="bubble bubble--2" aria-hidden="true"></span>
+              <span class="bubble bubble--3" aria-hidden="true"></span>
+              <div class="sphere-glass">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&q=88" alt="Paciente sonriendo con su odontólogo en consulta" width="400" height="400">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="features-ribbon glass reveal">
+          <div class="feature-item">
+            <img src="https://img.icons8.com/fluency/48/artificial-intelligence.png" alt="" width="36" height="36">
+            <span>Tecnología avanzada</span>
+          </div>
+          <div class="feature-item">
+            <img src="https://img.icons8.com/fluency/48/heart-with-pulse.png" alt="" width="36" height="36">
+            <span>Atención personalizada</span>
+          </div>
+          <div class="feature-item">
+            <img src="https://img.icons8.com/fluency/48/diamond.png" alt="" width="36" height="36">
+            <span>Materiales de calidad</span>
+          </div>
+          <div class="feature-item">
+            <img src="https://img.icons8.com/fluency/48/clean.png" alt="" width="36" height="36">
+            <span>Ambiente seguro y limpio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-section" id="formulario">
+      <div class="container">
+        <div class="form-card glass reveal">
+          <header class="form-card__head">
+            <h2>Agenda tu <span class="text-cyan">cita</span></h2>
+            <p>Completa el formulario y te contactamos por WhatsApp con tu solicitud</p>
+          </header>
+          <form id="citaForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nombre">Nombre completo <span>*</span></label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. María González" required autocomplete="name">
+                <span class="form-error">Ingresa tu nombre completo</span>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono / WhatsApp <span>*</span></label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 7822-7317" required autocomplete="tel">
+                <span class="form-error">Ingresa un teléfono válido</span>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" autocomplete="email">
+                <span class="form-error">Correo no válido</span>
+              </div>
+              <div class="form-group">
+                <label for="servicio">Servicio de interés <span>*</span></label>
+                <select id="servicio" name="servicio" required>
+                  <option value="">Selecciona un servicio</option>
+                  <option value="Limpieza dental">Limpieza dental</option>
+                  <option value="Blanqueamiento dental">Blanqueamiento dental</option>
+                  <option value="Ortodoncia">Ortodoncia</option>
+                  <option value="Implantes dentales">Implantes dentales</option>
+                  <option value="Diseño de sonrisa">Diseño de sonrisa</option>
+                  <option value="Odontopediatría">Odontopediatría</option>
+                  <option value="Carillas dentales">Carillas dentales</option>
+                  <option value="Primera consulta gratis">Primera consulta gratis</option>
+                  <option value="Otro">Otro / No estoy seguro</option>
+                </select>
+                <span class="form-error">Selecciona un servicio</span>
+              </div>
+              <div class="form-group">
+                <label for="horario">Horario preferido <span>*</span></label>
+                <select id="horario" name="horario" required>
+                  <option value="">Selecciona horario</option>
+                  <option value="Mañana (8:00 – 12:00)">Mañana (8:00 – 12:00)</option>
+                  <option value="Tarde (12:00 – 18:00)">Tarde (12:00 – 18:00)</option>
+                  <option value="Sábado por la mañana">Sábado por la mañana</option>
+                  <option value="Lo antes posible">Lo antes posible</option>
+                  <option value="Flexible">Flexible / A convenir</option>
+                </select>
+                <span class="form-error">Selecciona un horario</span>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="necesidad">¿Qué necesitas? <span>*</span></label>
+                <textarea id="necesidad" name="necesidad" placeholder="Cuéntanos brevemente tu situación, dolor, objetivo o dudas..." required></textarea>
+                <span class="form-error">Describe qué necesitas o el motivo de tu consulta</span>
+              </div>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn btn--wa btn--block">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Enviar solicitud por WhatsApp
+              </button>
+            </div>
+            <p class="form-note">Al enviar, se abrirá WhatsApp con tu información organizada. Solo debes confirmar el mensaje.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Nuestros <span class="text-cyan">servicios</span></h2>
+          <p>Soluciones integrales con la más alta tecnología dental</p>
+        </header>
+        <div class="services-grid reveal">
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Limpieza dental">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1609840114035-3c981b7824f6?w=200&q=80" alt="Limpieza dental"></div></div>
+            <span>Limpieza dental</span>
+          </a>
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Blanqueamiento dental">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=200&q=80" alt="Blanqueamiento"></div></div>
+            <span>Blanqueamiento</span>
+          </a>
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Ortodoncia">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=200&q=80" alt="Ortodoncia"></div></div>
+            <span>Ortodoncia</span>
+          </a>
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Implantes dentales">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=200&q=80" alt="Implantes"></div></div>
+            <span>Implantes</span>
+          </a>
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Diseño de sonrisa">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=200&q=80" alt="Diseño de sonrisa"></div></div>
+            <span>Diseño de sonrisa</span>
+          </a>
+          <a href="#formulario" class="service-item form-trigger" data-servicio="Odontopediatría">
+            <div class="service-bubble"><div class="service-bubble-inner"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80" alt="Odontopediatría"></div></div>
+            <span>Odontopediatría</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="stats-bar glass reveal">
+          <div class="stat"><strong>+5,000</strong><span>Pacientes felices</span></div>
+          <div class="stat"><strong>+10</strong><span>Años de experiencia</span></div>
+          <div class="stat"><strong>+15</strong><span>Especialistas</span></div>
+          <div class="stat"><strong>98%</strong><span>Satisfacción</span></div>
+          <div class="stat-promo">
+            <img src="https://img.icons8.com/3d-fluency/94/tooth.png" alt="" width="44" height="44">
+            <div><b>Primera consulta</b><em>GRATIS</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tratamientos">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2>Tratamientos <span class="text-cyan">destacados</span></h2>
+          <p>Procedimientos premium con resultados excepcionales</p>
+        </header>
+        <div class="treatments-grid reveal">
+          <article class="t-card glass">
+            <h3>Blanqueamiento Dental</h3>
+            <div class="t-card__img">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=500&q=85" alt="Blanqueamiento dental" loading="lazy">
+            </div>
+            <p class="t-card__price">Desde $120</p>
+            <a href="#formulario" class="btn btn--wa btn--block form-trigger" data-servicio="Blanqueamiento dental">Consultar por WhatsApp</a>
+          </article>
+          <article class="t-card glass">
+            <h3>Ortodoncia Metálica</h3>
+            <div class="t-card__img">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=500&q=85" alt="Ortodoncia" loading="lazy">
+            </div>
+            <p class="t-card__price">Desde $350</p>
+            <a href="#formulario" class="btn btn--wa btn--block form-trigger" data-servicio="Ortodoncia">Consultar por WhatsApp</a>
+          </article>
+          <article class="t-card glass">
+            <h3>Implantes Dentales</h3>
+            <div class="t-card__img">
+              <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&q=85" alt="Implantes" loading="lazy">
+            </div>
+            <p class="t-card__price">Desde $800</p>
+            <a href="#formulario" class="btn btn--wa btn--block form-trigger" data-servicio="Implantes dentales">Consultar por WhatsApp</a>
+          </article>
+          <article class="t-card glass">
+            <h3>Carillas Dentales</h3>
+            <div class="t-card__img">
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=500&q=85" alt="Carillas" loading="lazy">
+            </div>
+            <p class="t-card__price">Desde $250</p>
+            <a href="#formulario" class="btn btn--wa btn--block form-trigger" data-servicio="Carillas dentales">Consultar por WhatsApp</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tecnologia">
+      <div class="container">
+        <div class="tech-box glass reveal">
+          <div>
+            <h2>Equipos modernos para <span class="text-cyan">resultados excepcionales</span></h2>
+            <ul class="tech-check">
+              <li>
+                <img src="https://img.icons8.com/fluency/48/3d.png" alt="" width="32" height="32">
+                <div><strong>Escáner 3D</strong><span>Diagnóstico digital de alta precisión</span></div>
+              </li>
+              <li>
+                <img src="https://img.icons8.com/fluency/48/x-ray.png" alt="" width="32" height="32">
+                <div><strong>Rayos X digitales</strong><span>Menor radiación, resultados instantáneos</span></div>
+              </li>
+              <li>
+                <img src="https://img.icons8.com/fluency/48/laser-beam.png" alt="" width="32" height="32">
+                <div><strong>Tecnología láser</strong><span>Tratamientos mínimamente invasivos</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="tech-visual">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&q=85" alt="Odontólogo con tecnología avanzada" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta-big glass reveal">
+          <h2>¿Listo para mejorar tu sonrisa?</h2>
+          <p>Agenda tu consulta hoy. Primera valoración sin costo.</p>
+          <a href="#formulario" class="btn btn--wa btn--xl">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escríbenos ahora por WhatsApp
+          </a>
+        </div>
+        <div class="values-bar glass reveal">
+          <div class="value-chip"><img src="https://img.icons8.com/fluency/28/heart-with-pulse.png" alt=""> Atención personalizada</div>
+          <div class="value-chip"><img src="https://img.icons8.com/fluency/28/card-in-use.png" alt=""> Facilidades de pago</div>
+          <div class="value-chip"><img src="https://img.icons8.com/fluency/28/marker.png" alt=""> Ubicación céntrica</div>
+          <div class="value-chip"><img src="https://img.icons8.com/fluency/28/calendar.png" alt=""> Agenda flexible</div>
+          <div class="value-chip"><img src="https://img.icons8.com/fluency/28/clipboard.png" alt=""> Seguimiento continuo</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacto">
+    <div class="container footer-grid">
+      <div>
+        <a href="#inicio" class="logo">
+          <img src="https://img.icons8.com/fluency/96/tooth.png" alt="" width="38" height="38">
+          <span><strong>SONRÍE</strong><small>Clínica Dental</small></span>
+        </a>
+        <p class="footer-copy">© 2026 Sonríe Clínica Dental. Todos los derechos reservados.</p>
+      </div>
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#formulario">Agendar cita</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#tratamientos">Tratamientos</a></li>
+          <li><a href="#tecnologia">Tecnología</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#" class="wa-link" data-wa data-wa-msg="Hola, quiero información sobre Limpieza Dental">Limpieza dental</a></li>
+          <li><a href="#" class="wa-link" data-wa data-wa-msg="Hola, quiero información sobre Blanqueamiento">Blanqueamiento</a></li>
+          <li><a href="#" class="wa-link" data-wa data-wa-msg="Hola, quiero información sobre Ortodoncia">Ortodoncia</a></li>
+          <li><a href="#" class="wa-link" data-wa data-wa-msg="Hola, quiero información sobre Implantes">Implantes</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacto</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:+50378227317">+503 7822-7317</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <a href="mailto:contacto@sonrieclinica.com">contacto@sonrieclinica.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>San Salvador, El Salvador</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Lun – Vie: 8:00 – 18:00 · Sáb: 8:00 – 13:00</span>
+          </li>
+        </ul>
+        <a href="#" class="footer-wa wa-link" data-wa>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="wa-fab wa-link" data-wa aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+  (function () {
+    var WA = '50378227317';
+    var MSG = 'Hola, quiero información sobre sus servicios dentales';
+
+    document.querySelectorAll('.wa-link').forEach(function (el) {
+      var m = el.getAttribute('data-wa-msg') || MSG;
+      el.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
+      el.target = '_blank';
+      el.rel = 'noopener noreferrer';
+    });
+
+    var form = document.getElementById('citaForm');
+    var servicioSelect = document.getElementById('servicio');
+
+    function buildFormMessage(data) {
+      var lines = [
+        '¡Hola! Solicito información desde la web de *Sonríe Clínica Dental*',
+        '',
+        '📋 *SOLICITUD DE CITA*',
+        '',
+        '👤 *Datos del paciente*',
+        '• Nombre: ' + data.nombre,
+        '• Teléfono: ' + data.telefono
+      ];
+      if (data.email) lines.push('• Correo: ' + data.email);
+      lines.push('');
+      lines.push('🦷 *Lo que necesito*');
+      lines.push('• Servicio: ' + data.servicio);
+      lines.push('• Horario preferido: ' + data.horario);
+      lines.push('• Detalle: ' + data.necesidad);
+      lines.push('');
+      lines.push('Gracias, quedo atento a su respuesta.');
+      return lines.join('\n');
+    }
+
+    function openWhatsApp(text) {
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
+    }
+
+    function clearErrors() {
+      form.querySelectorAll('.form-group').forEach(function (g) {
+        g.classList.remove('has-error');
+        g.querySelectorAll('input, select, textarea').forEach(function (f) { f.classList.remove('error'); });
+      });
+    }
+
+    function setError(field) {
+      var group = field.closest('.form-group');
+      if (group) group.classList.add('has-error');
+      field.classList.add('error');
+    }
+
+    function validateForm() {
+      clearErrors();
+      var valid = true;
+      var nombre = document.getElementById('nombre');
+      var telefono = document.getElementById('telefono');
+      var email = document.getElementById('email');
+      var servicio = document.getElementById('servicio');
+      var horario = document.getElementById('horario');
+      var necesidad = document.getElementById('necesidad');
+
+      if (!nombre.value.trim() || nombre.value.trim().length < 2) {
+        setError(nombre); valid = false;
+      }
+      if (!telefono.value.trim() || telefono.value.replace(/\D/g, '').length < 7) {
+        setError(telefono); valid = false;
+      }
+      if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        setError(email); valid = false;
+      }
+      if (!servicio.value) { setError(servicio); valid = false; }
+      if (!horario.value) { setError(horario); valid = false; }
+      if (!necesidad.value.trim() || necesidad.value.trim().length < 8) {
+        setError(necesidad); valid = false;
+      }
+      return valid;
+    }
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateForm()) {
+          var first = form.querySelector('.has-error input, .has-error select, .has-error textarea');
+          if (first) first.focus();
+          return;
+        }
+        var data = {
+          nombre: document.getElementById('nombre').value.trim(),
+          telefono: document.getElementById('telefono').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          servicio: document.getElementById('servicio').value,
+          horario: document.getElementById('horario').value,
+          necesidad: document.getElementById('necesidad').value.trim()
+        };
+        openWhatsApp(buildFormMessage(data));
+      });
+
+      form.querySelectorAll('input, select, textarea').forEach(function (field) {
+        field.addEventListener('input', function () {
+          var group = field.closest('.form-group');
+          if (group) group.classList.remove('has-error');
+          field.classList.remove('error');
+        });
+      });
+    }
+
+    document.querySelectorAll('.form-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var svc = btn.getAttribute('data-servicio');
+        if (svc && servicioSelect) servicioSelect.value = svc;
+      });
+    });
+
+    if (window.location.hash === '#formulario' && window.location.search) {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('servicio') && servicioSelect) servicioSelect.value = params.get('servicio');
+    }
+
+    var navWrap = document.getElementById('navWrap');
+    var navLinks = document.getElementById('navLinks');
+    var navToggle = document.getElementById('navToggle');
+
+    window.addEventListener('scroll', function () {
+      navWrap.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+
+    if (navToggle) {
+      navToggle.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (id === '#') return;
+        var t = document.querySelector(id);
+        if (!t) return;
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 88, behavior: 'smooth' });
+      });
+    });
+
+    var reveals = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('on'); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(function (el) { obs.observe(el); });
+    requestAnimationFrame(function () {
+      reveals.forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('on');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
